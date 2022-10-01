@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff188b750f4449449fef162f887d7bcb, type: 3}
+  m_Name: NodeBuildingService
+  m_EditorClassIdentifier: 
+  Prefabs:
+  - ENode: 0
+    Prefab: {fileID: 4006777799272998468, guid: 16218e647abf4bd41878ac29088dc6c1, type: 3}
+  - ENode: 1
+    Prefab: {fileID: 4006777799272998468, guid: 700e37ff55662cf4c8560ce894beb3d5, type: 3}
+  - ENode: 2
+    Prefab: {fileID: 4006777799272998468, guid: 9e70d72a86270e64dac36821a246cc4d, type: 3}
