@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Pathfinding {
@@ -40,6 +43,9 @@ namespace Pathfinding {
       }
       
       GridState.Nodes = nodes;
+#if UNITY_EDITOR
+      EditorUtility.SetDirty(GridState);
+#endif
     }
     
     void Load() {
