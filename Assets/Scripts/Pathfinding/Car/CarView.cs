@@ -4,34 +4,34 @@ using UnityEngine;
 
 namespace DefaultNamespace.Pathfinding.States {
   public class CarView : MonoBehaviour {
-    public List<Location> Path;
-    public Location Current;
-    public Location Next;
-    public int currentIndex;
+    public List<Vector3> WayPoints;
+    public Vector3 Current;
+    public Vector3 Next;
+    public int CurrentIndex;
     public bool IsMovingToTheEnd;
 
     public BoxCollider ColliderInFront;
     public float Speed = 1;
 
-    public void SetGoal(List<Location> path) {
-      Path = path;
+    public void SetGoal(List<Vector3> wayPoints) {
+      WayPoints = wayPoints;
       IsMovingToTheEnd = false;
       
-      if (Path.Any()) {
-        currentIndex = Path.Count - 1;
-        Current = Path[currentIndex];
+      if (WayPoints.Any()) {
+        CurrentIndex = 0;//WayPoints.Count - 1;
+        Current = WayPoints[CurrentIndex];
       }
     }
     
     public void Update() {
-      if (!Path.Any()) return;
+      if (!WayPoints.Any()) return;
       
-      (Current, currentIndex) = CheckIfCloseToNextLocation();
+      (Current, CurrentIndex) = CheckIfCloseToNextLocation();
 
-      Vector3 goal = GetGoal();
-      if (IsCloseToPoint(goal)) {
-        IsMovingToTheEnd = !IsMovingToTheEnd;
-      }
+      // Vector3 goal = GetGoal();
+      // if (IsCloseToPoint(goal)) {
+        // IsMovingToTheEnd = !IsMovingToTheEnd; //needed if we want to change direction
+      // }
       
       (Next, _) = CalculateNextLocation();
 
@@ -39,7 +39,7 @@ namespace DefaultNamespace.Pathfinding.States {
       if (Physics.CheckBox(ColliderInFront.transform.position + ColliderInFront.center, Vector3.one / 20, Quaternion.identity, LayerMask.GetMask("Bus"))) return;
       
 
-      Vector3 direction = new Vector3(Next.x, 0, Next.y) - new Vector3(Current.x, 0, Current.y);
+      Vector3 direction = Next - Current;
       transform.position += Speed * Time.deltaTime * direction;
       transform.rotation = Quaternion.LookRotation(direction);
       
@@ -57,16 +57,16 @@ namespace DefaultNamespace.Pathfinding.States {
     }
 
     Vector3 GetGoal() {
-      int index = IsMovingToTheEnd ? Path.Count - 1 : 0;
-      return new Vector3(Path[index].x, 0, Path[index].y);
+      int index = WayPoints.Count - 1;//IsMovingToTheEnd ? WayPoints.Count - 1 : 0; //needed if we want to change direction
+      return new Vector3(WayPoints[index].x, 0, WayPoints[index].y);
     }
 
-    (Location, int) CheckIfCloseToNextLocation() {
-      (Location next, int index) = CalculateNextLocation();
+    (Vector3, int) CheckIfCloseToNextLocation() {
+      (Vector3 next, int index) = CalculateNextLocation();
       
-      return IsCloseToPoint(new Vector3(next.x, 0, next.y)) 
+      return IsCloseToPoint(next) 
         ? (next, index) 
-        : (Current, currentIndex);
+        : (Current, currentIndex: CurrentIndex);
 
       // Location min = Path.First();
       // float minDistance = float.MaxValue;
@@ -85,14 +85,14 @@ namespace DefaultNamespace.Pathfinding.States {
       // return (min, index);
     }
     
-    (Location, int) CalculateNextLocation() {
+    (Vector3, int) CalculateNextLocation() {
       if (IsMovingToTheEnd) {
-        var indexToEnd = Mathf.Min(currentIndex + 1, Path.Count - 1);
-        return (Path[indexToEnd], indexToEnd);
+        var indexToEnd = (CurrentIndex + 1) % WayPoints.Count - 1;// Mathf.Min(currentIndex + 1, WayPoints.Count - 1);
+        return (WayPoints[indexToEnd], indexToEnd);
       }
 
-      int indexToStart = Mathf.Max(currentIndex - 1, 0);
-      return (Path[indexToStart], indexToStart);
+      int indexToStart = CurrentIndex - 1 < 0 ? WayPoints.Count - 1 : CurrentIndex - 1;//Mathf.Max(currentIndex - 1, 0);
+      return (WayPoints[indexToStart], indexToStart);
     }
     
     public void DrawBox(Vector3 pos, Quaternion rot, Vector3 scale, Color c)
