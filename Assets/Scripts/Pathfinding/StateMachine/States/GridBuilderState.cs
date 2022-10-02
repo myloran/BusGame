@@ -1,12 +1,14 @@
 using System;
 using System.Linq;
+using Pathfinding;
 using Plugins.Ext;
 using TMPro;
 using UnityEngine;
 
-namespace Pathfinding {
-  public class GridBuilder : MonoBehaviour {
+namespace DefaultNamespace.Pathfinding.States {
+  public class GridBuilderState : BaseState {
     public NodeBuildingService NodeBuildingService;
+    public Canvas Canvas;
     public NGrid Grid;
     public Camera Camera;
     public TMP_Dropdown DNode;
@@ -14,21 +16,29 @@ namespace Pathfinding {
 
     ENode selectedNode;
 
-    public void Init() {
+    public override void Init() {
       var names = Enum.GetNames(typeof(ENode));
       var options = names.Select(n => new TMP_Dropdown.OptionData(n));
       DNode.options.Clear();
       DNode.options.AddRange(options);
       if (names.Any()) DNode.captionText.text = names[0];
+    }
 
+    public override void OnEnter() {
+      Canvas.enabled = true;
       DNode.onValueChanged.AddListener(SetSelectedNode);
+    }
+
+    public override void OnExit() {
+      Canvas.enabled = false;
+      DNode.onValueChanged.RemoveListener(SetSelectedNode);
     }
 
     void SetSelectedNode(int nodeIndex) {
       selectedNode = (ENode) nodeIndex;
     }
-
-    public void Update() {
+    
+    public override void OnUpdate() {
       if (Input.GetMouseButtonDown(0)) {
         int mask = LayerMask.GetMask(NodeLayers);
         Ray ray = Camera.ScreenPointToRay(Input.mousePosition);

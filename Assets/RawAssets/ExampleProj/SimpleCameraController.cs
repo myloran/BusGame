@@ -75,6 +75,7 @@ namespace UnityTemplateProjects
         public bool invertY = false;
 
         public Vector2 _speed;
+        Vector3 _previousMousePosition;
 
 #if ENABLE_INPUT_SYSTEM
         InputAction movementAction;
@@ -174,16 +175,16 @@ namespace UnityTemplateProjects
             }
 
             // Hide and lock cursor when right mouse button pressed
-            if (IsRightMouseButtonDown())
-            {
-                Cursor.lockState = CursorLockMode.Locked;
+            if (IsRightMouseButtonDown()) {
+                _previousMousePosition = Input.mousePosition;
+                // Cursor.lockState = CursorLockMode.Locked;
             }
 
             // Unlock and show cursor when right mouse button released
-            if (IsRightMouseButtonUp())
-            {
+            if (IsRightMouseButtonUp()) {
+                // Input.mousePosition = _previousMousePosition;
                 Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+                // Cursor.lockState = CursorLockMode.None;
             }
 
             // Rotation

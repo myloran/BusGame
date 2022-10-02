@@ -1,14 +1,17 @@
+using DefaultNamespace.Pathfinding.States;
 using Pathfinding;
 using UnityEngine;
 
 namespace DefaultNamespace {
   public class GameEntryPoint : MonoBehaviour {
     public NGrid Grid;
-    public GridBuilder GridBuilder;
+    public PathfindingStateMachine PathfindingStateMachine;
+    public PathfindingStateController PathfindingStateController;
     
     void Start() {
       Grid.Init();
-      GridBuilder.Init();
+      PathfindingStateMachine.Init();
+      PathfindingStateController.Init();
     }
   }
 }

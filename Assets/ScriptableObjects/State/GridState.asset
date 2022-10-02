@@ -76,7 +76,7 @@ MonoBehaviour:
   - ENode: 0
     X: 2
     Y: 0
-  - ENode: 2
+  - ENode: 1
     X: 2
     Y: 1
   - ENode: 0
@@ -106,22 +106,22 @@ MonoBehaviour:
   - ENode: 0
     X: 3
     Y: 0
+  - ENode: 2
+    X: 3
+    Y: 1
   - ENode: 1
     X: 3
-    Y: 1
-  - ENode: 0
-    X: 3
     Y: 2
-  - ENode: 0
+  - ENode: 2
     X: 3
     Y: 3
-  - ENode: 0
+  - ENode: 1
     X: 3
     Y: 4
-  - ENode: 0
+  - ENode: 1
     X: 3
     Y: 5
-  - ENode: 0
+  - ENode: 2
     X: 3
     Y: 6
   - ENode: 0
@@ -136,13 +136,13 @@ MonoBehaviour:
   - ENode: 0
     X: 4
     Y: 0
-  - ENode: 0
+  - ENode: 1
     X: 4
     Y: 1
   - ENode: 0
     X: 4
     Y: 2
-  - ENode: 0
+  - ENode: 1
     X: 4
     Y: 3
   - ENode: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   - ENode: 0
     X: 4
     Y: 5
-  - ENode: 0
+  - ENode: 1
     X: 4
     Y: 6
   - ENode: 0
@@ -166,13 +166,13 @@ MonoBehaviour:
   - ENode: 0
     X: 5
     Y: 0
-  - ENode: 0
+  - ENode: 2
     X: 5
     Y: 1
-  - ENode: 0
+  - ENode: 1
     X: 5
     Y: 2
-  - ENode: 0
+  - ENode: 2
     X: 5
     Y: 3
   - ENode: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   - ENode: 0
     X: 5
     Y: 5
-  - ENode: 0
+  - ENode: 1
     X: 5
     Y: 6
   - ENode: 0

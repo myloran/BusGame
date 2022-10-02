@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Pathfinding {
-  public class NGrid : MonoBehaviour {
+  public class NGrid : MonoBehaviour, WeightedGraph<Location> {
     public NodeView[,] Nodes;
     public NodeBuildingService NodeBuildingService;
     public GridState GridState;
@@ -14,6 +14,14 @@ namespace Pathfinding {
     public int SizeX;
     public int SizeY;
     public bool NeedLoad;
+    
+    public readonly Location[] DIRS = new []
+    {
+      new Location(1, 0),
+      new Location(0, -1),
+      new Location(-1, 0),
+      new Location(0, 1)
+    };
 
     public void Init() {
       if (NeedLoad)
@@ -55,5 +63,29 @@ namespace Pathfinding {
         Nodes[node.X, node.Y] = NodeBuildingService.Build(node.ENode,node.X, node.Y, StartingPoint);
       }
     }
+
+    public double Cost(Location a, Location b) {
+      return 1;
+    }
+
+    public IEnumerable<Location> Neighbors(Location id) {
+      foreach (var dir in DIRS) {
+        Location next = new Location(id.x + dir.x, id.y + dir.y);
+        if (IsInBounds(next) && IsPassable(next)) {
+          yield return next;
+        }
+      }
+    }
+
+    public bool IsInBounds(Location id) {
+      return 0 <= id.x && id.x < SizeX
+                       && 0 <= id.y && id.y < SizeY;
+    }
+    
+    public bool IsPassable(Location id)
+    {
+      return Nodes[id.x, id.y].Model.ENode == ENode.Road || Nodes[id.x, id.y].Model.ENode == ENode.Intersection;
+    }
+
   }
 }
