@@ -10,7 +10,9 @@ namespace DefaultNamespace.Pathfinding.States {
     public NGrid Grid;
     public GameObject StartingPointPrefab;
     public GameObject EndPointPrefab;
+    public GameObject CarPrefab;
     public List<GameObject> PathVisualization = new List<GameObject>();
+    public List<GameObject> Cars = new List<GameObject>();
     public Canvas Canvas;
     public Camera Camera;
     public Location From;
@@ -19,12 +21,14 @@ namespace DefaultNamespace.Pathfinding.States {
     public string[] NodeLayers;
     AStarSearch aStarSearch;
     List<Location> path = new List<Location>();
+    public bool IsDebugEnabled;
 
     public override void OnEnter() {
       Canvas.enabled = true;
     }
 
     public override void OnExit() {
+      ClearCars();
       ClearVisualization();
       Canvas.enabled = false;
       EPathBuilder = EPathBuilder.SelectLocationFrom;
@@ -44,38 +48,46 @@ namespace DefaultNamespace.Pathfinding.States {
         switch (EPathBuilder) {
           case EPathBuilder.SelectLocationFrom:
             From = new Location(view.Model.X, view.Model.Y);
-            GameObject startPoint = Instantiate(StartingPointPrefab, new Vector3(view.Model.X, 0, view.Model.Y),
-              Quaternion.identity, transform);
-            PathVisualization.Add(startPoint);
+            if (IsDebugEnabled) {
+              GameObject startPoint = Instantiate(StartingPointPrefab, new Vector3(view.Model.X, 0, view.Model.Y),
+                Quaternion.identity, transform);
+              PathVisualization.Add(startPoint);
+            }
+
             EPathBuilder = EPathBuilder.SelectLocationTo;
             break;
           case EPathBuilder.SelectLocationTo:
             To = new Location(view.Model.X, view.Model.Y);
-            GameObject endPoint = Instantiate(EndPointPrefab, new Vector3(view.Model.X, 0, view.Model.Y),
-              Quaternion.identity, transform);
-            PathVisualization.Add(endPoint);
-                
+            
+            if (From == To) {
+              EPathBuilder = EPathBuilder.Reset;
+              break;
+            }
+
             aStarSearch = new AStarSearch(Grid, From, To);
             aStarSearch.Calculate();
-                
-            // foreach (KeyValuePair<Location, Location> location in aStarSearch.cameFrom) {
-            //   Vector3 from = new Vector3(location.Key.x, 0, location.Key.y);
-            //   Vector3 to = new Vector3(location.Value.x, 0, location.Value.y);
-            //   GameObject line = DrawLine(from, to, Color.green);
-            //   
-            //   line.transform.SetParent(transform);
-            //   PathVisualization.Add(line);
-            // }
-
             path = aStarSearch.GetCleanPath();
-                
-            for (int i = 1; i < path.Count; i++) {
-              Vector3 from = new Vector3(path[i-1].x, 0, path[i-1].y);
-              Vector3 to = new Vector3(path[i].x, 0, path[i].y);
-              GameObject line = DrawLine(@from, to, Color.green);
-                  
-              line.transform.SetParent(transform);
-              PathVisualization.Add(line);
+            
+            GameObject car = Instantiate(CarPrefab, new Vector3(From.x, 0, From.y),
+              Quaternion.identity, transform);
+            CarView carView = car.AddComponent<CarView>();
+            carView.SetGoal(path);
+            carView.ColliderInFront = carView.transform.Find("ColliderInFront").GetComponent<BoxCollider>();
+            Cars.Add(car);
+            
+            if (IsDebugEnabled) {
+              GameObject endPoint = Instantiate(EndPointPrefab, new Vector3(view.Model.X, 0, view.Model.Y),
+                Quaternion.identity, transform);
+              PathVisualization.Add(endPoint);
+              
+              for (int i = 1; i < path.Count; i++) {
+                Vector3 from = new Vector3(path[i - 1].x, 0, path[i - 1].y);
+                Vector3 to = new Vector3(path[i].x, 0, path[i].y);
+                GameObject line = DrawLine(@from, to, Color.green);
+
+                line.transform.SetParent(transform);
+                PathVisualization.Add(line);
+              }
             }
                 
             EPathBuilder = EPathBuilder.Reset;
@@ -113,8 +125,17 @@ namespace DefaultNamespace.Pathfinding.States {
       PathVisualization.Clear();
     }
     
+    void ClearCars() {
+      foreach (GameObject obj in Cars) {
+        Destroy(obj);
+      }
+
+      Cars.Clear();
+    }
+    
     void OnDrawGizmos() {
       if (aStarSearch == null) return;
+      if (!IsDebugEnabled) return;
       if (EPathBuilder != EPathBuilder.Reset) return;
 
       foreach (var d in aStarSearch.costSoFar) {

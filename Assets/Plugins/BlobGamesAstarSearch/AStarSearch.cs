@@ -12,7 +12,8 @@ public interface WeightedGraph<L>
 }
 
 
-public struct Location {
+[Serializable]
+public struct Location : IComparable<Location> {
     // Implementation notes: I am using the default Equals but it can
     // be slow. You'll probably want to override both Equals and
     // GetHashCode in a real project.
@@ -38,12 +39,26 @@ public struct Location {
         }
     }
 
+    public int CompareTo(Location other) {
+        var xComparison = x.CompareTo(other.x);
+        if (xComparison != 0) return xComparison;
+        return y.CompareTo(other.y);
+    }
+
     public static bool operator ==(Location obj1, Location obj2) {
         return obj1.Equals(obj2);
     }
 
     public static bool operator !=(Location obj1, Location obj2) {
         return !obj1.Equals(obj2);
+    }
+    
+    public static bool operator <(Location obj1, Location obj2) {
+        return obj1.CompareTo(obj2) < 0;
+    }
+
+    public static bool operator >(Location obj1, Location obj2) {
+        return obj1.CompareTo(obj2) > 0;
     }
 }
 

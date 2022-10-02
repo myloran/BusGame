@@ -2898,11 +2898,14 @@ MonoBehaviour:
   Grid: {fileID: 1382020331}
   StartingPointPrefab: {fileID: 7402792874518947732, guid: 865831d9f703bb94c96e0d4bb0d15652, type: 3}
   EndPointPrefab: {fileID: 7402792874518947732, guid: 6c2de131062fd50469e05ec104d6d71f, type: 3}
+  CarPrefab: {fileID: 7402792874518947732, guid: 3e86cad5db30bc045a4eba8653155997, type: 3}
   PathVisualization: []
+  Cars: []
   Canvas: {fileID: 2123157227}
   Camera: {fileID: 1687258584}
   EPathBuilder: 0
   NodeLayers: []
+  IsDebugEnabled: 1
 --- !u!1001 &1556901916
 PrefabInstance:
   m_ObjectHideFlags: 0
