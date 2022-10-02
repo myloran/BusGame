@@ -21,6 +21,7 @@ namespace DefaultNamespace.Pathfinding.States {
     public string[] NodeLayers;
     AStarSearch aStarSearch;
     List<Location> path = new List<Location>();
+    List<Vector3> wayPoints = new List<Vector3>();
     public bool IsDebugEnabled;
 
     public override void OnEnter() {
@@ -35,70 +36,76 @@ namespace DefaultNamespace.Pathfinding.States {
     }
 
     public override void OnUpdate() {
-      if (Input.GetMouseButtonDown(0)) {
-        int mask = LayerMask.GetMask(NodeLayers);
-        Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
-        bool isHit = Physics.Raycast(ray, out RaycastHit hit, 100 /*, mask*/);
+      if (!Input.GetMouseButtonDown(0)) return;
+      
+      int mask = LayerMask.GetMask(NodeLayers);
+      Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
+      bool isHit = Physics.Raycast(ray, out RaycastHit hit, 100 /*, mask*/);
 
-        if (!isHit || UIExt.IsPointerOverUIElement()) return;
-        NodeView view = hit.transform.GetComponent<NodeView>();
+      if (!isHit || UIExt.IsPointerOverUIElement()) return;
+      NodeView view = hit.transform.GetComponent<NodeView>();
 
-        if (view == null) return;
+      if (view == null) return;
         
-        switch (EPathBuilder) {
-          case EPathBuilder.SelectLocationFrom:
-            From = new Location(view.Model.X, view.Model.Y);
-            if (IsDebugEnabled) {
-              GameObject startPoint = Instantiate(StartingPointPrefab, new Vector3(view.Model.X, 0, view.Model.Y),
-                Quaternion.identity, transform);
-              PathVisualization.Add(startPoint);
-            }
-
-            EPathBuilder = EPathBuilder.SelectLocationTo;
-            break;
-          case EPathBuilder.SelectLocationTo:
-            To = new Location(view.Model.X, view.Model.Y);
-            
-            if (From == To) {
-              EPathBuilder = EPathBuilder.Reset;
-              break;
-            }
-
-            aStarSearch = new AStarSearch(Grid, From, To);
-            aStarSearch.Calculate();
-            path = aStarSearch.GetCleanPath();
-            
-            GameObject car = Instantiate(CarPrefab, new Vector3(From.x, 0, From.y),
+      switch (EPathBuilder) {
+        case EPathBuilder.SelectLocationFrom:
+          From = new Location(view.Model.X, view.Model.Y);
+          if (IsDebugEnabled) {
+            GameObject startPoint = Instantiate(StartingPointPrefab, new Vector3(view.Model.X, 0, view.Model.Y),
               Quaternion.identity, transform);
-            CarView carView = car.AddComponent<CarView>();
-            carView.SetGoal(path);
-            carView.ColliderInFront = carView.transform.Find("ColliderInFront").GetComponent<BoxCollider>();
-            Cars.Add(car);
-            
-            if (IsDebugEnabled) {
-              GameObject endPoint = Instantiate(EndPointPrefab, new Vector3(view.Model.X, 0, view.Model.Y),
-                Quaternion.identity, transform);
-              PathVisualization.Add(endPoint);
-              
-              for (int i = 1; i < path.Count; i++) {
-                Vector3 from = new Vector3(path[i - 1].x, 0, path[i - 1].y);
-                Vector3 to = new Vector3(path[i].x, 0, path[i].y);
-                GameObject line = DrawLine(@from, to, Color.green);
+            PathVisualization.Add(startPoint);
+          }
 
-                line.transform.SetParent(transform);
-                PathVisualization.Add(line);
-              }
-            }
-                
+          EPathBuilder = EPathBuilder.SelectLocationTo;
+          break;
+        case EPathBuilder.SelectLocationTo:
+          To = new Location(view.Model.X, view.Model.Y);
+            
+          if (From == To) {
             EPathBuilder = EPathBuilder.Reset;
             break;
-          case EPathBuilder.Reset:
-            ClearVisualization();
-            EPathBuilder = EPathBuilder.SelectLocationFrom;
-            break;
-          default:
-            throw new ArgumentOutOfRangeException();
-        }
+          }
+
+          aStarSearch = new AStarSearch(Grid, From, To);
+          aStarSearch.Calculate();
+          path = aStarSearch.GetCleanPath();
+          wayPoints = Grid.GetWayPoints(path);
+            
+          if (wayPoints.Count <= 0) {
+            Debug.LogError("No waypoints");
+            return;
+          }
+            
+          GameObject car = Instantiate(CarPrefab, wayPoints[wayPoints.Count - 1], Quaternion.identity, transform);
+          CarView carView = car.AddComponent<CarView>();
+          carView.SetGoal(wayPoints);
+          carView.ColliderInFront = carView.transform.Find("ColliderInFront").GetComponent<BoxCollider>();
+          Cars.Add(car);
+            
+          if (IsDebugEnabled) {
+            GameObject endPoint = Instantiate(EndPointPrefab, new Vector3(view.Model.X, 0, view.Model.Y),
+              Quaternion.identity, transform);
+            PathVisualization.Add(endPoint);
+              
+            for (int i = 0; i < wayPoints.Count; i++) {
+              int previousIndex = i == 0 ? wayPoints.Count - 1 : i - 1;
+              Vector3 from = wayPoints[previousIndex];
+              Vector3 to = wayPoints[i];
+              GameObject line = DrawLine(@from, to, Color.green);
+
+              line.transform.SetParent(transform);
+              PathVisualization.Add(line);
+            }
+          }
+                
+          EPathBuilder = EPathBuilder.Reset;
+          break;
+        case EPathBuilder.Reset:
+          ClearVisualization();
+          EPathBuilder = EPathBuilder.SelectLocationFrom;
+          break;
+        default:
+          throw new ArgumentOutOfRangeException();
       }
     }
     

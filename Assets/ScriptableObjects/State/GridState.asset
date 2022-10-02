@@ -106,13 +106,13 @@ MonoBehaviour:
   - ENode: 0
     X: 3
     Y: 0
-  - ENode: 2
+  - ENode: 1
     X: 3
     Y: 1
   - ENode: 1
     X: 3
     Y: 2
-  - ENode: 2
+  - ENode: 1
     X: 3
     Y: 3
   - ENode: 1
@@ -121,7 +121,7 @@ MonoBehaviour:
   - ENode: 1
     X: 3
     Y: 5
-  - ENode: 2
+  - ENode: 1
     X: 3
     Y: 6
   - ENode: 0
@@ -166,13 +166,13 @@ MonoBehaviour:
   - ENode: 0
     X: 5
     Y: 0
-  - ENode: 2
+  - ENode: 1
     X: 5
     Y: 1
   - ENode: 1
     X: 5
     Y: 2
-  - ENode: 2
+  - ENode: 1
     X: 5
     Y: 3
   - ENode: 0
