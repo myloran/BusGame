@@ -96,7 +96,7 @@ namespace Pathfinding {
         return wayPoints;
       }
       
-      for (int i = 1; i < locations.Count - 1; i++) {
+      for (int i = 1; i < locations.Count; i++) {
         wayPoints.Add(GetWayPoint(locations[i - 1], locations[i], locations[i - 1]));
       }
 
@@ -127,7 +127,7 @@ namespace Pathfinding {
       //   wayPoints.AddRange(wayPointsInLocation);
       // }
             
-      for (int i = locations.Count - 2; i >= 1; i--) {
+      for (int i = locations.Count - 1; i >= 1; i--) {
         wayPoints.Add(GetWayPoint(locations[i], locations[i - 1], locations[i - 1]));
       }
       
