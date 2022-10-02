@@ -69,6 +69,7 @@ namespace DefaultNamespace.Pathfinding.States {
           aStarSearch = new AStarSearch(Grid, From, To);
           aStarSearch.Calculate();
           path = aStarSearch.GetCleanPath();
+          path.Reverse();
           wayPoints = Grid.GetWayPoints(path);
             
           if (wayPoints.Count <= 0) {

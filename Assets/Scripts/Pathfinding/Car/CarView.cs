@@ -18,7 +18,7 @@ namespace DefaultNamespace.Pathfinding.States {
       IsMovingToTheEnd = false;
       
       if (WayPoints.Any()) {
-        CurrentIndex = WayPoints.Count - 1;
+        CurrentIndex = 0;//WayPoints.Count - 1;
         Current = WayPoints[CurrentIndex];
       }
     }

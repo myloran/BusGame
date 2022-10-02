@@ -95,16 +95,20 @@ namespace Pathfinding {
         Debug.LogError("No locations");
         return wayPoints;
       }
-
-      wayPoints.Add(GetWayPoint(locations[0], locations[1], locations[0]));
-
+      
       for (int i = 1; i < locations.Count - 1; i++) {
-        Location from = locations[i - 1];
-        Location to = locations[i];
-        Vector3 direction = new Vector3(to.x, 0, to.y) - new Vector3(from.x, 0, from.y);
-        List<Vector3> wayPointsInLocation = Nodes[to.x, to.y].GetWayPoints(direction);
-        wayPoints.AddRange(wayPointsInLocation);
+        wayPoints.Add(GetWayPoint(locations[i - 1], locations[i], locations[i - 1]));
       }
+
+      // wayPoints.Add(GetWayPoint(locations[0], locations[1], locations[0]));
+
+      // for (int i = 1; i < locations.Count - 1; i++) {
+      //   Location from = locations[i - 1];
+      //   Location to = locations[i];
+      //   Vector3 direction = new Vector3(to.x, 0, to.y) - new Vector3(from.x, 0, from.y);
+      //   List<Vector3> wayPointsInLocation = Nodes[to.x, to.y].GetWayPoints(direction);
+      //   wayPoints.AddRange(wayPointsInLocation);
+      // }
 
       wayPoints.Add(GetWayPoint(locations[locations.Count - 2], locations[locations.Count - 1], locations[locations.Count - 1]));
       
@@ -112,22 +116,29 @@ namespace Pathfinding {
 
       wayPoints.Add(GetWayPoint(locations[locations.Count - 1], locations[locations.Count - 2], locations[locations.Count - 1]));
 
-      for (int i = locations.Count - 1; i > 1; i--) {
-        Location from = locations[i];
-        Location to = locations[i-1];
-        Vector3 direction = new Vector3(to.x, 0, to.y) - new Vector3(from.x, 0, from.y);
-        List<Vector3> wayPointsInLocation = Nodes[to.x, to.y].GetWayPoints(direction);
-        wayPointsInLocation.Reverse();
-        wayPoints.AddRange(wayPointsInLocation);
+      // wayPoints.Add(GetWayPoint(locations[locations.Count - 1], locations[locations.Count - 2], locations[locations.Count - 1]));
+      //
+      // for (int i = locations.Count - 1; i > 1; i--) {
+      //   Location from = locations[i];
+      //   Location to = locations[i-1];
+      //   Vector3 direction = new Vector3(to.x, 0, to.y) - new Vector3(from.x, 0, from.y);
+      //   List<Vector3> wayPointsInLocation = Nodes[to.x, to.y].GetWayPoints(direction);
+      //   wayPointsInLocation.Reverse();
+      //   wayPoints.AddRange(wayPointsInLocation);
+      // }
+            
+      for (int i = locations.Count - 2; i >= 1; i--) {
+        wayPoints.Add(GetWayPoint(locations[i], locations[i - 1], locations[i - 1]));
       }
       
-      wayPoints.Add(GetWayPoint(locations[1], locations[0], locations[0]));
+      // wayPoints.Add(GetWayPoint(locations[1], locations[0], locations[0]));
       
       return wayPoints;
     }
 
     Vector3 GetWayPoint(Location from, Location to, Location wayPointLocation) {
       Vector3 direction = new Vector3(to.x, 0, to.y) - new Vector3(from.x, 0, from.y);
+      // Debug.DrawRay(new Vector3(from.x, 0, from.y), Vector3.up*100, Color.blue, 100);
       return Nodes[wayPointLocation.x, wayPointLocation.y].GetCenterWayPoint(direction);
     }
   }
