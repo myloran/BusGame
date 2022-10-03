@@ -122,7 +122,7 @@ namespace DefaultNamespace.Economy {
         // ResetState();
       }
       
-      if (GameState.PassengersCollected > 100) {
+      if (GameState.PassengersCollected > PassengerWinCondition) {
         // WinText.text = "Level completed!";
         WinPopupCanvas.enabled = true;
         PathBuilderState.ResetPath();
