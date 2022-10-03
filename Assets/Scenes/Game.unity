@@ -2704,7 +2704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1098429782
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3614,6 +3614,7 @@ MonoBehaviour:
   BusCount: 0
   IsStartedForReal: 0
   WinPopupCanvas: {fileID: 939134525}
+  WinText: {fileID: 1363565063}
 --- !u!4 &1340188783
 Transform:
   m_ObjectHideFlags: 0

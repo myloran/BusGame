@@ -45,6 +45,7 @@ namespace DefaultNamespace.Economy {
     public int BusCount;
     public bool IsStartedForReal;
     public Canvas WinPopupCanvas;
+    public Text WinText;
 
     public void Init() {
       State = GameState;
@@ -111,7 +112,15 @@ namespace DefaultNamespace.Economy {
     void Update() {
       if (GameState.Money < 0) {
         GameState.Money = 0;
+        WinText.text = "Level failed!";
         WinPopupCanvas.enabled = true;
+        ResetState();
+      }
+      
+      if (GameState.PassengersCollected > 100) {
+        WinText.text = "Level completed!";
+        WinPopupCanvas.enabled = true;
+        ResetState();
       }
       
       Timer += Time.deltaTime;
