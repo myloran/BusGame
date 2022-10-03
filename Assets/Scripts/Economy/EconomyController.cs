@@ -46,6 +46,7 @@ namespace DefaultNamespace.Economy {
     public int BusCount;
     public bool IsStartedForReal;
     public Canvas WinPopupCanvas;
+    public Canvas LosePopupCanvas;
     public Text WinText;
 
     public PathBuilderState PathBuilderState;
@@ -115,14 +116,14 @@ namespace DefaultNamespace.Economy {
     void Update() {
       if (GameState.Money < 0) {
         GameState.Money = 0;
-        WinText.text = "Level failed!";
-        WinPopupCanvas.enabled = true;
+        // WinText.text = "Level failed!";
+        LosePopupCanvas.enabled = true;
         PathBuilderState.ResetPath();
         // ResetState();
       }
       
       if (GameState.PassengersCollected > 100) {
-        WinText.text = "Level completed!";
+        // WinText.text = "Level completed!";
         WinPopupCanvas.enabled = true;
         PathBuilderState.ResetPath();
         // ResetState();
