@@ -2704,7 +2704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1098429782
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3586,11 +3586,11 @@ MonoBehaviour:
     Money: 0
     PassengersCollected: 0
     BusStations: []
-  StartingMoney: 100
+  StartingMoney: 30
   TimeToSpawnPassenger: 2
   TimeToRemovePassenger: 10
-  TimeForBusToPayForGasoline: 10
-  TimeOfNoPassengerAppearingOnceCollected: 10
+  TimeForBusToPayForGasoline: 5
+  TimeOfNoPassengerAppearingOnceCollected: 7
   PassengerPercentToSpawn: 50
   PassengerPercentToRemove: 20
   PassengerMaxPercentToRemove: 50
@@ -3615,6 +3615,7 @@ MonoBehaviour:
   IsStartedForReal: 0
   WinPopupCanvas: {fileID: 939134525}
   WinText: {fileID: 1363565063}
+  PathBuilderState: {fileID: 1507119170}
 --- !u!4 &1340188783
 Transform:
   m_ObjectHideFlags: 0
@@ -3754,6 +3755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1382020330}
   - component: {fileID: 1382020331}
+  - component: {fileID: 1382020332}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -3798,6 +3800,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6e8da82da768bea468d219be329dfd4f, type: 2}
   - {fileID: 11400000, guid: e2b37327bbff5ad4d8878267c93aa06f, type: 2}
   - {fileID: 11400000, guid: 58841717ab6eafd449be6a61eac922be, type: 2}
+--- !u!114 &1382020332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382020329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bc7772997b4f24bdd322890c874685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BRestart: {fileID: 1098429783}
 --- !u!114 &1424378401 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3992818227286716608, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}

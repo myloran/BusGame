@@ -1,5 +1,6 @@
 using System;
 using DefaultNamespace.Events;
+using DefaultNamespace.Pathfinding.States;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,6 +47,8 @@ namespace DefaultNamespace.Economy {
     public bool IsStartedForReal;
     public Canvas WinPopupCanvas;
     public Text WinText;
+
+    public PathBuilderState PathBuilderState;
 
     public void Init() {
       State = GameState;
@@ -114,13 +117,15 @@ namespace DefaultNamespace.Economy {
         GameState.Money = 0;
         WinText.text = "Level failed!";
         WinPopupCanvas.enabled = true;
-        ResetState();
+        PathBuilderState.ResetPath();
+        // ResetState();
       }
       
       if (GameState.PassengersCollected > 100) {
         WinText.text = "Level completed!";
         WinPopupCanvas.enabled = true;
-        ResetState();
+        PathBuilderState.ResetPath();
+        // ResetState();
       }
       
       Timer += Time.deltaTime;
