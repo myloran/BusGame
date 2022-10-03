@@ -354,8 +354,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 33.530006, y: 30.3179}
-  m_SizeDelta: {x: 1343.934, y: 119.2058}
+  m_AnchoredPosition: {x: 34.9822, y: 55.116}
+  m_SizeDelta: {x: 1443.409, y: 110.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6547169573772239856
 CanvasRenderer:
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Text: 'Buy Bus and Connect Red Stations to Create bus lane
 
     Collect 50 passengers
-    to complete the level'
+    to complete levels'
 --- !u!1 &3992818225788220045
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 761, y: -66}
+  m_AnchoredPosition: {x: 748, y: -66}
   m_SizeDelta: {x: 85, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3992818225788220046
@@ -699,7 +699,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 906.5, y: -68.98007}
+  m_AnchoredPosition: {x: 956, y: -68.98007}
   m_SizeDelta: {x: 125.1602, y: 125.1602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3992818226005199936
@@ -819,7 +819,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy Bus 20$
+  m_Text: Buy Bus 10$
 --- !u!114 &3992818226101752305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,7 +1081,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1522,7 +1522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 829.4357, y: 340.7661}
+  m_AnchoredPosition: {x: 829.4357, y: 342}
   m_SizeDelta: {x: 229.1873, y: 152.1261}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3992818226906339288

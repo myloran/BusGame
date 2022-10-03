@@ -160,8 +160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -538, y: -359}
-  m_SizeDelta: {x: 198.519, y: 103.3}
+  m_AnchoredPosition: {x: -1050.4467, y: -645.177}
+  m_SizeDelta: {x: 398.9601, y: 179.1655}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &39450750
 MonoBehaviour:
@@ -226,13 +226,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39450748}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8980392, g: 0.8509804, b: 0.015686275, a: 1}
+  m_Color: {r: 0.0627451, g: 0.14509805, b: 0.34901962, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1990,7 +1990,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 0f59ec3fa7249984fa39a4bbbbe4d602, type: 3}
     m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
@@ -2632,8 +2632,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.61486053, y: -0.000015258789}
-  m_SizeDelta: {x: 1.2294, y: -0.000068665}
+  m_AnchoredPosition: {x: -3.3795013, y: 1.2701035}
+  m_SizeDelta: {x: -30.4503, y: -29.0569}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &942462103
 MonoBehaviour:
@@ -3027,8 +3027,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -538, y: -359}
-  m_SizeDelta: {x: 198.519, y: 103.3}
+  m_AnchoredPosition: {x: -945.70355, y: -595.59424}
+  m_SizeDelta: {x: 481.3913, y: 188.8887}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1098429783
 MonoBehaviour:
@@ -3093,13 +3093,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098429781}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8980392, g: 0.8509804, b: 0.015686275, a: 1}
+  m_Color: {r: 0.0627451, g: 0.14509805, b: 0.34901962, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3302,8 +3302,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.61486053, y: -0.000015258789}
-  m_SizeDelta: {x: 1.2294, y: -0.000068665}
+  m_AnchoredPosition: {x: -1.9534302, y: -0.000015258789}
+  m_SizeDelta: {x: -21.9724, y: -20.5247}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1147118963
 MonoBehaviour:
@@ -3982,7 +3982,7 @@ MonoBehaviour:
     Money: 0
     PassengersCollected: 0
     BusStations: []
-  StartingMoney: 30
+  StartingMoney: 50
   TimeToSpawnPassenger: 2
   TimeToRemovePassenger: 10
   TimeForBusToPayForGasoline: 5
@@ -3991,8 +3991,8 @@ MonoBehaviour:
   PassengerPercentToRemove: 20
   PassengerMaxPercentToRemove: 50
   MoneyPerCollectedPassenger: 1
-  BusCost: 20
-  GasolineCost: 2
+  BusCost: 10
+  GasolineCost: 1
   PassengerWinCondition: 50
   MoneyLoseCondition: 0
   Timer: 0
@@ -4061,8 +4061,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 16.00769}
-  m_SizeDelta: {x: 609.2878, y: 141.9846}
+  m_AnchoredPosition: {x: 84.729004, y: 16.00769}
+  m_SizeDelta: {x: 778.7459, y: 141.9846}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1363565063
 MonoBehaviour:
@@ -4085,7 +4085,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 0f59ec3fa7249984fa39a4bbbbe4d602, type: 3}
     m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
@@ -5210,7 +5210,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 1
   m_AntialiasingQuality: 2
@@ -5256,8 +5255,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 64, y: -0.0000076294}
-  m_SizeDelta: {x: 219.945, y: 39.429}
+  m_AnchoredPosition: {x: 67.66, y: -0.0000076294}
+  m_SizeDelta: {x: 567.594, y: 39.429}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1725028056
 MonoBehaviour:
@@ -5300,14 +5299,14 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 49
+    m_MaxSize: 96
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart
+  m_Text: NEXT Level
 --- !u!222 &1725028058
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5485,8 +5484,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 64, y: -0.0000076294}
-  m_SizeDelta: {x: 219.945, y: 39.429}
+  m_AnchoredPosition: {x: 68.677, y: -0.0000076294}
+  m_SizeDelta: {x: 385.079, y: 39.429}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1786026183
 MonoBehaviour:
@@ -5529,14 +5528,14 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 49
+    m_MaxSize: 94
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart
+  m_Text: TRY Again
 --- !u!222 &1786026185
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5686,77 +5685,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 584068351425856737, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1343.934
-      objectReference: {fileID: 0}
-    - target: {fileID: 584068351425856737, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 33.530006
-      objectReference: {fileID: 0}
-    - target: {fileID: 2883157443462049734, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_Text
-      value: Buy Bus and Connect Red Stations to Create bus lane
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818225788220044, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 748
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818225788220044, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -66
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818225994310954, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1.2294
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818225994310954, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -0.000068665
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818225994310954, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.61483765
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818225994310954, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.000015258789
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818226005199942, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 956
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818226101752304, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_Text
-      value: Buy Bus 20$
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818226101752304, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_FontData.m_MaxSize
-      value: 49
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818226101752310, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 192.2566
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818226101752310, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 39.4287
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818226101752310, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 69.71037
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818226101752310, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 36.180214
-      objectReference: {fileID: 0}
     - target: {fileID: 3992818226394936387, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
       propertyPath: m_Name
       value: GameplayUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818226394936444, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3992818226394936447, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
       propertyPath: m_Pivot.x
@@ -5841,10 +5772,6 @@ PrefabInstance:
     - target: {fileID: 3992818226394936447, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3992818226906339294, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 342
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
@@ -7000,7 +6927,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 1.83672e-40, w: -3.11e-43}
+  m_BoundingSphereOverride: {x: 0, y: NaN, z: 2.5849394e-26, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 575976702033373224}
   - component: {fileID: 575976702033373225}
   m_Layer: 5
-  m_Name: +1Effect
+  m_Name: -1Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &575976702033373225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18943073, g: 0.8584906, b: 0.11878477, a: 1}
+  m_Color: {r: 0.85882354, g: 0.117647074, b: 0.17881744, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -217,7 +217,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +1
+  m_Text: -1
 --- !u!114 &7212807545521015253
 MonoBehaviour:
   m_ObjectHideFlags: 0
