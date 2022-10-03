@@ -44,6 +44,8 @@ namespace DefaultNamespace.Economy {
 
     public int BusCount;
     public bool IsStartedForReal;
+    public Canvas WinPopupCanvas;
+    public Text WinText;
 
     public void Init() {
       State = GameState;
@@ -85,8 +87,11 @@ namespace DefaultNamespace.Economy {
     }
 
     void BusBought() {
-      MoneyDiff -= BusCost;
-      GameState.Money -= BusCost;
+      if (GameState.Money - BusCost >= 0) {
+        MoneyDiff -= BusCost;
+        GameState.Money -= BusCost;
+        EventController.BusBoughtConfirm();
+      }
       //Add to ui
       //Allow to click it
     }
@@ -105,6 +110,19 @@ namespace DefaultNamespace.Economy {
     }
 
     void Update() {
+      if (GameState.Money < 0) {
+        GameState.Money = 0;
+        WinText.text = "Level failed!";
+        WinPopupCanvas.enabled = true;
+        ResetState();
+      }
+      
+      if (GameState.PassengersCollected > 100) {
+        WinText.text = "Level completed!";
+        WinPopupCanvas.enabled = true;
+        ResetState();
+      }
+      
       Timer += Time.deltaTime;
       Timer2 += Time.deltaTime;
       Timer3 += Time.deltaTime;

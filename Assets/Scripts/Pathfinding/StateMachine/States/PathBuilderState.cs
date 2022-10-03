@@ -47,7 +47,12 @@ namespace DefaultNamespace.Pathfinding.States {
       // Canvas.enabled = true;
       EconomyController.Init();
       BBuyBus.onClick.AddListener(BuyBus);
+      EventController.BusBoughtConfirm += BusBoughtConfirm;
       // BUseBus.onClick.AddListener(UseBus);
+    }
+
+    void BusBoughtConfirm() {
+      BusCount++;
     }
 
     void UseBus() {
@@ -64,11 +69,15 @@ namespace DefaultNamespace.Pathfinding.States {
     }
 
     void BuyBus() {
-      BusCount++;
       EventController.BusBought();
     }
 
     public override void OnExit() {
+      ResetPath();
+      EPathBuilder = EPathBuilder.SelectLocationFrom;
+    }
+
+    public void ResetPath() {
       BBuyBus.onClick.RemoveListener(BuyBus);
       // BUseBus.onClick.RemoveListener(UseBus);
       ClearCars();
@@ -78,7 +87,6 @@ namespace DefaultNamespace.Pathfinding.States {
       WayPointNodes.Clear();
       path.Clear();
       Canvas.enabled = false;
-      EPathBuilder = EPathBuilder.SelectLocationFrom;
       EconomyController.ResetState();
     }
 

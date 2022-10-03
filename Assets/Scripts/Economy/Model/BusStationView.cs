@@ -9,6 +9,7 @@ namespace DefaultNamespace.Economy {
     // public Bounds SpawnArea;
     public GameObject PassengerPrefab;
     public List<GameObject> Passengers;
+    public GameObject TextPrefab;
 
     const int MaxAttempts = 10;
     
@@ -27,15 +28,26 @@ namespace DefaultNamespace.Economy {
     }
 
     public void ClearPassengers() {
-      foreach (var passenger in Passengers) {
-        Destroy(passenger);
+      for (int i = Passengers.Count - 1; i >= 0; i--) {
+        GameObject text = Instantiate(TextPrefab, Passengers[i].transform.position, quaternion.identity);
+        text.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Vector3.up);
+        Destroy(Passengers[i]);
+        Passengers.RemoveAt(i);
       }
+      // for (var i = 0; i < Passengers.Count; i++) {
+      //   var passenger = Passengers[i];
+      //   Instantiate(TextPrefab, passenger.transform.position, quaternion.identity);
+      //   Destroy(passenger);
+      //   Passengers.RemoveAt(i);
+      // }
     }
     
     public void ClearPassengers(int count) {
       int max = Mathf.Min(count, Passengers.Count);
       
       for (int i = max - 1; i >= 0; i--) {
+        GameObject text = Instantiate(TextPrefab, Passengers[i].transform.position, quaternion.identity);
+        text.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Vector3.up);
         Destroy(Passengers[i]);
         Passengers.RemoveAt(i);
       }

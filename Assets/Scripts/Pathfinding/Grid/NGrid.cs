@@ -15,6 +15,7 @@ namespace Pathfinding {
     public int SizeX;
     public int SizeY;
     public bool NeedLoad;
+    public List<GridState> Levels = new List<GridState>();
     
     public readonly Location[] DIRS = new []
     {
@@ -60,7 +61,11 @@ namespace Pathfinding {
     void Load() {
       Nodes = new NodeView[SizeX, SizeY];
 
-      foreach (NodeModel node in GridState.Nodes) {
+      var gridState = Levels.Count > 0 
+        ? Levels[Random.Range(0, Levels.Count)]
+        : GridState;
+      
+      foreach (NodeModel node in gridState.Nodes) {
         Nodes[node.X, node.Y] = NodeBuildingService.Build(node.ENode,node.X, node.Y, StartingPoint);
       }
     }
