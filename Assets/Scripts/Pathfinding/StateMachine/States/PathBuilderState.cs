@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using DefaultNamespace.Economy;
+using DefaultNamespace.Events;
 using Pathfinding;
 using Plugins.Ext;
 using UnityEditor;
@@ -23,9 +25,11 @@ namespace DefaultNamespace.Pathfinding.States {
     List<Location> path = new List<Location>();
     List<Vector3> wayPoints = new List<Vector3>();
     public bool IsDebugEnabled;
+    public EconomyController EconomyController;
 
     public override void OnEnter() {
       Canvas.enabled = true;
+      EconomyController.Init();
     }
 
     public override void OnExit() {
@@ -33,6 +37,7 @@ namespace DefaultNamespace.Pathfinding.States {
       ClearVisualization();
       Canvas.enabled = false;
       EPathBuilder = EPathBuilder.SelectLocationFrom;
+      EconomyController.ResetState();
     }
 
     public override void OnUpdate() {
@@ -81,6 +86,7 @@ namespace DefaultNamespace.Pathfinding.States {
           CarView carView = car.AddComponent<CarView>();
           carView.SetGoal(wayPoints);
           carView.ColliderInFront = carView.transform.Find("ColliderInFront").GetComponent<BoxCollider>();
+          carView.ColliderInRight = carView.transform.Find("ColliderInRight").GetComponent<BoxCollider>();
           Cars.Add(car);
             
           if (IsDebugEnabled) {
@@ -99,6 +105,7 @@ namespace DefaultNamespace.Pathfinding.States {
             }
           }
                 
+          EventController.BusBought();
           EPathBuilder = EPathBuilder.Reset;
           break;
         case EPathBuilder.Reset:

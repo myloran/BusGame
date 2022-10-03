@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace.Events;
 using UnityEngine;
 
 namespace DefaultNamespace.Pathfinding.States {
@@ -11,6 +12,7 @@ namespace DefaultNamespace.Pathfinding.States {
     public bool IsMovingToTheEnd;
 
     public BoxCollider ColliderInFront;
+    public BoxCollider ColliderInRight;
     public float Speed = 1;
 
     public void SetGoal(List<Vector3> wayPoints) {
@@ -38,6 +40,17 @@ namespace DefaultNamespace.Pathfinding.States {
       DrawBox(ColliderInFront.transform.position + ColliderInFront.center, Quaternion.identity, Vector3.one / 20, Color.blue);
       if (Physics.CheckBox(ColliderInFront.transform.position + ColliderInFront.center, Vector3.one / 20, Quaternion.identity, LayerMask.GetMask("Bus"))) return;
       
+      DrawBox(ColliderInRight.transform.position + ColliderInRight.center, Quaternion.identity, Vector3.one*1.2f, Color.blue);
+      Collider[] colliders = Physics.OverlapBox(ColliderInRight.transform.position + ColliderInRight.center,
+        Vector3.one * 1.2f,
+        Quaternion.identity, LayerMask.GetMask("Passenger"));
+      if (colliders.Length > 0) {
+        Debug.Log("Found passengers");
+        EventController.PassengerCollected(colliders.Length);
+        foreach (Collider col in colliders) {
+          Destroy(col.gameObject);
+        }
+      }
 
       Vector3 direction = Next - Current;
       transform.position += Speed * Time.deltaTime * direction;
