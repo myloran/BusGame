@@ -46,8 +46,28 @@ namespace DefaultNamespace.Economy {
       PassengerDiff = 0;
       BusCount = 0;
       IsStarted = true;
-      EventController.PassengerCollected += PassengerCollected;
       EventController.BusBought += BusBought;
+      EventController.LocationVisited += LocationVisited;
+    }
+
+    void LocationVisited(Location location) {
+      foreach (BusStationView view in BusStations) {
+        if (location != view.Model.Location) continue;
+        
+        int count = view.Model.PassengerCount;
+        
+        PassengerDiff += count;
+        MoneyDiff += count * MoneyPerCollectedPassenger;
+
+        GameState.PassengersCollected += count;
+        GameState.Money += count * MoneyPerCollectedPassenger;
+
+        view.Model.PassengerCount = 0;
+        view.Model.TimeBeforeNextSpawn = TimeOfNoPassengerAppearingOnceCollected;
+
+        view.ClearPassengers();
+        return;
+      }
     }
 
     void BusBought() {
@@ -58,16 +78,6 @@ namespace DefaultNamespace.Economy {
       //Allow to click it
     }
 
-    void PassengerCollected(int count) {
-      PassengerDiff += count;
-      MoneyDiff += count * MoneyPerCollectedPassenger;
-
-      GameState.PassengersCollected += count;
-      GameState.Money += count * MoneyPerCollectedPassenger;
-      
-      // view.Model.TimeBeforeNextSpawn = TimeOfNoPassengerAppearingOnceCollected;
-    }
-
     public void ResetState() {
       MoneyDiff = 0;
       PassengerDiff = 0;
@@ -75,6 +85,8 @@ namespace DefaultNamespace.Economy {
       GameState.PassengersCollected = 0;
       BusCount = 0;
       IsStarted = false;
+      EventController.BusBought -= BusBought;
+      EventController.LocationVisited -= LocationVisited;
     }
 
     void Update() {

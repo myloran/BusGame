@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace DefaultNamespace.Pathfinding.States {
   public class CarView : MonoBehaviour {
+    public List<Location> Path;
     public List<Vector3> WayPoints;
     public Vector3 Current;
     public Vector3 Next;
@@ -15,8 +16,9 @@ namespace DefaultNamespace.Pathfinding.States {
     public BoxCollider ColliderInRight;
     public float Speed = 1;
 
-    public void SetGoal(List<Vector3> wayPoints) {
+    public void SetGoal(List<Vector3> wayPoints, List<Location> path) {
       WayPoints = wayPoints;
+      Path = path;
       IsMovingToTheEnd = false;
       
       if (WayPoints.Any()) {
@@ -39,20 +41,38 @@ namespace DefaultNamespace.Pathfinding.States {
 
       DrawBox(ColliderInFront.transform.position + ColliderInFront.center, Quaternion.identity, Vector3.one / 20, Color.blue);
       if (Physics.CheckBox(ColliderInFront.transform.position + ColliderInFront.center, Vector3.one / 20, Quaternion.identity, LayerMask.GetMask("Bus"))) return;
+
+      var positionAtRight = transform.position;
+      float minDistance = float.MaxValue;
+      Location closestLocation = Path.First();
       
-      DrawBox(ColliderInRight.transform.position + ColliderInRight.center, Quaternion.identity, Vector3.one*1.2f, Color.blue);
-      Collider[] colliders = Physics.OverlapBox(ColliderInRight.transform.position + ColliderInRight.center,
-        Vector3.one * 1.2f,
-        Quaternion.identity, LayerMask.GetMask("Passenger"));
-      if (colliders.Length > 0) {
-        Debug.Log("Found passengers");
-        EventController.PassengerCollected(colliders.Length);
-        foreach (Collider col in colliders) {
-          Destroy(col.gameObject);
+      foreach (var location in Path) {
+        var distance = Vector3.Distance(new Vector3(location.x, 0, location.y), positionAtRight);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestLocation = location;
         }
       }
+      Location rightLocation = new Location(closestLocation.x + Mathf.RoundToInt(transform.right.x), closestLocation.y + Mathf.RoundToInt(transform.right.z));
+      EventController.LocationVisited(rightLocation);
+      
+      // Vector3 clamped = new Vector3(Mathf.Round(transform.right.x), Mathf.Round(transform.right.y), Mathf.Round(transform.right.z));
+      // Debug.Log(transform.right + " " + clamped);
+      Debug.DrawRay(new Vector3(rightLocation.x, 0, rightLocation.y), Vector3.up, Color.cyan);
+        
+      // DrawBox(ColliderInRight.transform.position + ColliderInRight.center, Quaternion.identity, Vector3.one*1.2f, Color.blue);
+      // Collider[] colliders = Physics.OverlapBox(ColliderInRight.transform.position + ColliderInRight.center,
+      //   Vector3.one * 1.2f,
+      //   Quaternion.identity, LayerMask.GetMask("Passenger"));
+      // if (colliders.Length > 0) {
+      //   Debug.Log("Found passengers");
+      //   EventController.PassengerCollected(colliders.Length);
+      //   foreach (Collider col in colliders) {
+      //     Destroy(col.gameObject);
+      //   }
+      // }
 
-      Vector3 direction = Next - Current;
+      Vector3 direction = (Next - Current).normalized;
       transform.position += Speed * Time.deltaTime * direction;
       transform.rotation = Quaternion.LookRotation(direction);
       

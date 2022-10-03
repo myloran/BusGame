@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DefaultNamespace.Economy;
 using UnityEngine;
 
 namespace Pathfinding {
@@ -13,6 +14,9 @@ namespace Pathfinding {
           var view = obj.GetComponent<NodeView>() ?? obj.AddComponent<NodeView>();
           view.Obj = obj;
           view.Model = new NodeModel(eNode, x, y);
+          if (obj.TryGetComponent<BusStationView>(out var busStation)) {
+            busStation.Model = new BusStationModel{ Location = new Location(x, y)}; 
+          }
           return view;
         }
       }

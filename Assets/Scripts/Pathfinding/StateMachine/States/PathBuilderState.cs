@@ -84,7 +84,7 @@ namespace DefaultNamespace.Pathfinding.States {
             
           GameObject car = Instantiate(CarPrefab, wayPoints[wayPoints.Count - 1], Quaternion.identity, transform);
           CarView carView = car.AddComponent<CarView>();
-          carView.SetGoal(wayPoints);
+          carView.SetGoal(wayPoints, path);
           carView.ColliderInFront = carView.transform.Find("ColliderInFront").GetComponent<BoxCollider>();
           carView.ColliderInRight = carView.transform.Find("ColliderInRight").GetComponent<BoxCollider>();
           Cars.Add(car);

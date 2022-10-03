@@ -25,6 +25,12 @@ namespace DefaultNamespace.Economy {
         break;
       }
     }
+
+    public void ClearPassengers() {
+      foreach (var passenger in Passengers) {
+        Destroy(passenger);
+      }
+    }
         
     public void DrawBox(Vector3 pos, Quaternion rot, Vector3 scale, Color c)
     {
