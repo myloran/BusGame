@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28502667, g: 0.37139323, b: 0.49600998, a: 1}
+  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -821,17 +821,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &280391593 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3992818227031599930, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
-  m_PrefabInstance: {fileID: 1805442641}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &288044956
@@ -3205,6 +3194,7 @@ MonoBehaviour:
   TMoney2: {fileID: 238648128}
   TPassengers2: {fileID: 1424378401}
   BusCount: 0
+  IsStartedForReal: 0
 --- !u!4 &1340188783
 Transform:
   m_ObjectHideFlags: 0
@@ -3824,10 +3814,10 @@ MonoBehaviour:
   Camera: {fileID: 1687258584}
   EPathBuilder: 0
   NodeLayers: []
-  IsDebugEnabled: 1
+  IsDebugEnabled: 0
   EconomyController: {fileID: 1340188782}
   IsDrag: 0
-  BBuyBus: {fileID: 280391593}
+  BBuyBus: {fileID: 326291080}
   BUseBus: {fileID: 326291080}
   TBusCount: {fileID: 183039160}
   TBusCount2: {fileID: 277358372}
@@ -4476,6 +4466,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3992818226101752304, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
+      propertyPath: m_Text
+      value: Buy Bus
+      objectReference: {fileID: 0}
     - target: {fileID: 3992818226394936387, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
       propertyPath: m_Name
       value: GameplayUI
@@ -4562,6 +4556,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3992818226394936447, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992818226906339294, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 230.4738
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992818226906339294, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 828.7924
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992818227031599928, guid: 92b3b24155f634d4b8dc51203267b11a, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

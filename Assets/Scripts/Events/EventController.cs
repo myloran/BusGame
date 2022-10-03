@@ -5,5 +5,6 @@ namespace DefaultNamespace.Events {
     public static Action<Location> LocationVisited = l => { };
     public static Action<int> PassengerCollected = amount => {};
     public static Action BusBought = () => { };
+    public static Action BusUsed = () => { };
   }
 }

@@ -43,6 +43,7 @@ namespace DefaultNamespace.Economy {
     public Text TPassengers2;
 
     public int BusCount;
+    public bool IsStartedForReal;
 
     public void Init() {
       State = GameState;
@@ -53,8 +54,14 @@ namespace DefaultNamespace.Economy {
       PassengerDiff = 0;
       BusCount = 0;
       IsStarted = true;
+      EventController.BusUsed += BusUsed;
       EventController.BusBought += BusBought;
       EventController.LocationVisited += LocationVisited;
+    }
+
+    void BusUsed() {
+      BusCount++;
+      IsStartedForReal = true;
     }
 
     void LocationVisited(Location location) {
@@ -80,7 +87,6 @@ namespace DefaultNamespace.Economy {
     void BusBought() {
       MoneyDiff -= BusCost;
       GameState.Money -= BusCost;
-      BusCount++;
       //Add to ui
       //Allow to click it
     }
@@ -92,6 +98,8 @@ namespace DefaultNamespace.Economy {
       GameState.PassengersCollected = 0;
       BusCount = 0;
       IsStarted = false;
+      IsStartedForReal = false;
+      EventController.BusUsed -= BusUsed;
       EventController.BusBought -= BusBought;
       EventController.LocationVisited -= LocationVisited;
     }
@@ -104,24 +112,26 @@ namespace DefaultNamespace.Economy {
       foreach (BusStationView view in BusStations) {
         view.Model.TimeBeforeNextSpawn -= Time.deltaTime;
       }
-      
-      if (Timer > TimeToSpawnPassenger) {
-        Timer = 0;
-        MoneyDiff = 0;
-        PassengerDiff = 0;
-        SpawnPassengers();
-        //check win condition
-        //check lose condition
-      }
 
-      if (Timer2 > TimeToRemovePassenger) {
-        RemovePassengers();
-        Timer2 = 0;
-      }
+      if (IsStartedForReal) {
+        if (Timer > TimeToSpawnPassenger) {
+          Timer = 0;
+          MoneyDiff = 0;
+          PassengerDiff = 0;
+          SpawnPassengers();
+          //check win condition
+          //check lose condition
+        }
 
-      if (Timer3 > TimeForBusToPayForGasoline) {
-        PayForGasoline();
-        Timer3 = 0;
+        if (Timer2 > TimeToRemovePassenger) {
+          RemovePassengers();
+          Timer2 = 0;
+        }
+
+        if (Timer3 > TimeForBusToPayForGasoline) {
+          PayForGasoline();
+          Timer3 = 0;
+        }
       }
 
       TTime.text = "Time: " + Timer.ToString("F");

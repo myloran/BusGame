@@ -47,7 +47,7 @@ namespace DefaultNamespace.Pathfinding.States {
       // Canvas.enabled = true;
       EconomyController.Init();
       BBuyBus.onClick.AddListener(BuyBus);
-      BUseBus.onClick.AddListener(UseBus);
+      // BUseBus.onClick.AddListener(UseBus);
     }
 
     void UseBus() {
@@ -65,11 +65,12 @@ namespace DefaultNamespace.Pathfinding.States {
 
     void BuyBus() {
       BusCount++;
+      EventController.BusBought();
     }
 
     public override void OnExit() {
       BBuyBus.onClick.RemoveListener(BuyBus);
-      BUseBus.onClick.RemoveListener(UseBus);
+      // BUseBus.onClick.RemoveListener(UseBus);
       ClearCars();
       ClearVisualization();
       wayPoints.Clear();
@@ -98,6 +99,7 @@ namespace DefaultNamespace.Pathfinding.States {
     //fix releasing not on a road does not finish path
     //delete tiles if moved back
     public override void OnUpdate() {
+      CanUseBus = BusCount > 0;
       TBusCount.text = $"Bus count: {BusCount}";
       TBusCount2.text = BusCount.ToString();
       
@@ -119,7 +121,7 @@ namespace DefaultNamespace.Pathfinding.States {
         if (CanUseBus && view.Model.ENode == ENode.Intersection) {
           Debug.Log("start");
 
-          CanUseBus = false;
+          // CanUseBus = false;
           IsDrag = true;
           StartingLocation = location;
           CurrentLocation = StartingLocation;
@@ -157,8 +159,8 @@ namespace DefaultNamespace.Pathfinding.States {
         int uniqueBusStationCount = locations.Count;
         
         if (WayPoints.Count <= 1 || view.Model.ENode != ENode.Intersection || uniqueBusStationCount < 2) {
-          BusCount++;
-          CanUseBus = false;
+          // BusCount++;
+          // CanUseBus = false;
           
           foreach (var node in WayPointNodes) {
             node.Unhighlight();
@@ -251,7 +253,8 @@ namespace DefaultNamespace.Pathfinding.States {
         }
       }
 
-      EventController.BusBought();
+      BusCount--;
+      EventController.BusUsed();
       return false;
     }
 
