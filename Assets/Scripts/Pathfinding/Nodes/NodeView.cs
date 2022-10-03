@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,9 @@ namespace Pathfinding {
   public class NodeView : MonoBehaviour {
     public GameObject Obj;
     public NodeModel Model;
+    public Renderer Renderer;
+    public Material HighlightMaterial;
+    public Material OriginalMaterial;
 
     public Transform F;
     public Transform R;
@@ -19,6 +23,11 @@ namespace Pathfinding {
     public Transform BBL;
     public Transform LLB;
     public Transform LLF;
+
+    void Start() {
+      Renderer = GetComponent<Renderer>();
+      OriginalMaterial = Renderer.material;
+    }
 
     public Vector3 GetCenterWayPoint(Vector3 direction) {
       if (direction == Vector3.forward) return L.position;
@@ -38,6 +47,14 @@ namespace Pathfinding {
       
       Debug.LogError("Direction not handled");
       return default;
+    }
+
+    public void Highlight() {
+      Renderer.material = HighlightMaterial;
+    }
+
+    public void Unhighlight() {
+      Renderer.material = OriginalMaterial;
     }
   }
 }

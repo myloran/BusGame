@@ -160,7 +160,7 @@ MonoBehaviour:
   - ENode: 0
     X: 4
     Y: 8
-  - ENode: 0
+  - ENode: 1
     X: 4
     Y: 9
   - ENode: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   - ENode: 0
     X: 5
     Y: 8
-  - ENode: 0
+  - ENode: 1
     X: 5
     Y: 9
   - ENode: 0

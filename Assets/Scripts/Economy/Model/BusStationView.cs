@@ -31,6 +31,15 @@ namespace DefaultNamespace.Economy {
         Destroy(passenger);
       }
     }
+    
+    public void ClearPassengers(int count) {
+      int max = Mathf.Min(count, Passengers.Count);
+      
+      for (int i = max - 1; i >= 0; i--) {
+        Destroy(Passengers[i]);
+        Passengers.RemoveAt(i);
+      }
+    }
         
     public void DrawBox(Vector3 pos, Quaternion rot, Vector3 scale, Color c)
     {

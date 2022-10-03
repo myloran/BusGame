@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace DefaultNamespace.Pathfinding.States {
   public class CarView : MonoBehaviour {
-    public List<Location> Path;
-    public List<Vector3> WayPoints;
+    public List<Location> Path = new List<Location>();
+    public List<Vector3> WayPoints = new List<Vector3>();
     public Vector3 Current;
     public Vector3 Next;
     public int CurrentIndex;
@@ -17,8 +17,8 @@ namespace DefaultNamespace.Pathfinding.States {
     public float Speed = 1;
 
     public void SetGoal(List<Vector3> wayPoints, List<Location> path) {
-      WayPoints = wayPoints;
-      Path = path;
+      WayPoints.AddRange(wayPoints);
+      Path.AddRange(path);
       IsMovingToTheEnd = false;
       
       if (WayPoints.Any()) {
@@ -42,12 +42,11 @@ namespace DefaultNamespace.Pathfinding.States {
       DrawBox(ColliderInFront.transform.position + ColliderInFront.center, Quaternion.identity, Vector3.one / 20, Color.blue);
       if (Physics.CheckBox(ColliderInFront.transform.position + ColliderInFront.center, Vector3.one / 20, Quaternion.identity, LayerMask.GetMask("Bus"))) return;
 
-      var positionAtRight = transform.position;
       float minDistance = float.MaxValue;
       Location closestLocation = Path.First();
       
       foreach (var location in Path) {
-        var distance = Vector3.Distance(new Vector3(location.x, 0, location.y), positionAtRight);
+        var distance = Vector3.Distance(new Vector3(location.x, 0, location.y), transform.position);
         if (distance < minDistance) {
           minDistance = distance;
           closestLocation = location;

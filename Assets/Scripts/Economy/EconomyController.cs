@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 namespace DefaultNamespace.Economy {
   public class EconomyController : MonoBehaviour {
     public GameState GameState;
+    public static GameState State;
     public int StartingMoney = 100;
     public int TimeToSpawnPassenger = 10;
     public int TimeToRemovePassenger = 10;
@@ -39,6 +40,7 @@ namespace DefaultNamespace.Economy {
     public int BusCount;
 
     public void Init() {
+      State = GameState;
       BusStations = FindObjectsOfType<BusStationView>();
       GameState.Money = StartingMoney;
       GameState.PassengersCollected = 0;
@@ -63,7 +65,7 @@ namespace DefaultNamespace.Economy {
         GameState.Money += count * MoneyPerCollectedPassenger;
 
         view.Model.PassengerCount = 0;
-        view.Model.TimeBeforeNextSpawn = TimeOfNoPassengerAppearingOnceCollected;
+        if (count > 0) view.Model.TimeBeforeNextSpawn = TimeOfNoPassengerAppearingOnceCollected;
 
         view.ClearPassengers();
         return;
@@ -132,8 +134,10 @@ namespace DefaultNamespace.Economy {
         if (Random.Range(1, 100) <= PassengerPercentToRemove) continue;
 
         int passengersPercent = Random.Range(1, PassengerMaxPercentToRemove);
-        view.Model.PassengerCount -= view.Model.PassengerCount * passengersPercent / 100;
-        Debug.Log($"Removed: {passengersPercent}");
+        var count = view.Model.PassengerCount * passengersPercent / 100;
+        Debug.Log($"Removed: {count}");
+        view.Model.PassengerCount -= count;
+        view.ClearPassengers(count);
       }
     }
   }

@@ -6,6 +6,7 @@ namespace Pathfinding {
   [CreateAssetMenu(menuName = "Data/NodeBuildingService", fileName = "NodeBuildingService")]
   public class NodeBuildingService : ScriptableObject {
     public List<NodePrefab> Prefabs = new List<NodePrefab>();
+    public Material HighlightMaterial;
 
     public NodeView Build(ENode eNode, int x, int y, Transform startingPoint) {
       for (int i = 0; i < Prefabs.Count; i++) {
@@ -14,6 +15,7 @@ namespace Pathfinding {
           var view = obj.GetComponent<NodeView>() ?? obj.AddComponent<NodeView>();
           view.Obj = obj;
           view.Model = new NodeModel(eNode, x, y);
+          view.HighlightMaterial = HighlightMaterial;
           if (obj.TryGetComponent<BusStationView>(out var busStation)) {
             busStation.Model = new BusStationModel{ Location = new Location(x, y)}; 
           }
