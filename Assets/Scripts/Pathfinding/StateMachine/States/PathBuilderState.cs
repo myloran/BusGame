@@ -179,9 +179,9 @@ namespace DefaultNamespace.Pathfinding.States {
           SpawnBus(view);
           
           foreach (var node in WayPointNodes) {
-            if (node.Model.ENode == ENode.Intersection) {
+            // if (node.Model.ENode == ENode.Intersection) {
               node.Unhighlight();
-            }
+            // }
           }
         }
         
