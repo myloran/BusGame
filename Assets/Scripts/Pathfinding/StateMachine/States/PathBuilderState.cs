@@ -92,6 +92,8 @@ namespace DefaultNamespace.Pathfinding.States {
     //   }
     // }
 
+    //fix releasing not on a road does not finish path
+    //delete tiles if moved back
     public override void OnUpdate() {
       TBusCount.text = $"Bus count: {BusCount}";
       

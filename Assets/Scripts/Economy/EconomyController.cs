@@ -26,6 +26,8 @@ namespace DefaultNamespace.Economy {
     public int MoneyLoseCondition = 0;
     
     public float Timer;
+    public float Timer2;
+    public float Timer3;
     
     public BusStationView[] BusStations;
     public bool IsStarted;
@@ -93,6 +95,8 @@ namespace DefaultNamespace.Economy {
 
     void Update() {
       Timer += Time.deltaTime;
+      Timer2 += Time.deltaTime;
+      Timer3 += Time.deltaTime;
 
       foreach (BusStationView view in BusStations) {
         view.Model.TimeBeforeNextSpawn -= Time.deltaTime;
@@ -102,13 +106,21 @@ namespace DefaultNamespace.Economy {
         Timer = 0;
         MoneyDiff = 0;
         PassengerDiff = 0;
-        RemovePassengers();
         SpawnPassengers();
-        PayForGasoline();
         //check win condition
         //check lose condition
       }
-      
+
+      if (Timer2 > TimeToRemovePassenger) {
+        RemovePassengers();
+        Timer2 = 0;
+      }
+
+      if (Timer3 > TimeForBusToPayForGasoline) {
+        PayForGasoline();
+        Timer3 = 0;
+      }
+
       TTime.text = "Time: " + Timer.ToString("F");
       TMoney.text = "Money: " + GameState.Money + "(" + MoneyDiff + ")";
       TPassengers.text = "Passengers collected: " + GameState.PassengersCollected + "(" + PassengerDiff + ")";
