@@ -64,10 +64,10 @@ MonoBehaviour:
   - ENode: 0
     X: 1
     Y: 6
-  - ENode: 0
+  - ENode: 1
     X: 1
     Y: 7
-  - ENode: 0
+  - ENode: 2
     X: 1
     Y: 8
   - ENode: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   - ENode: 0
     X: 2
     Y: 6
-  - ENode: 0
+  - ENode: 1
     X: 2
     Y: 7
   - ENode: 0
@@ -265,7 +265,7 @@ MonoBehaviour:
   - ENode: 1
     X: 8
     Y: 3
-  - ENode: 1
+  - ENode: 0
     X: 8
     Y: 4
   - ENode: 1
