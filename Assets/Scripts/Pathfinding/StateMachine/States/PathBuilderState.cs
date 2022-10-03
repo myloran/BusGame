@@ -34,6 +34,7 @@ namespace DefaultNamespace.Pathfinding.States {
     public Button BBuyBus;
     public Button BUseBus;
     public TMP_Text TBusCount;
+    public Text TBusCount2;
     public int BusCount;
     public bool CanUseBus;
     public Location StartingLocation;
@@ -43,7 +44,7 @@ namespace DefaultNamespace.Pathfinding.States {
 
     public override void OnEnter() {
       BusCount = 1;
-      Canvas.enabled = true;
+      // Canvas.enabled = true;
       EconomyController.Init();
       BBuyBus.onClick.AddListener(BuyBus);
       BUseBus.onClick.AddListener(UseBus);
@@ -98,6 +99,7 @@ namespace DefaultNamespace.Pathfinding.States {
     //delete tiles if moved back
     public override void OnUpdate() {
       TBusCount.text = $"Bus count: {BusCount}";
+      TBusCount2.text = BusCount.ToString();
       
       // if (!Input.GetMouseButtonDown(0)) return;
       
@@ -109,12 +111,12 @@ namespace DefaultNamespace.Pathfinding.States {
       NodeView view = hit.transform.GetComponent<NodeView>();
 
       if (view == null) return;
-      if (view.Model.ENode != ENode.Road) return;
+      // if (view.Model.ENode != ENode.Road) return;
 
       Location location = new Location(view.Model.X, view.Model.Y);
       
       if (Input.GetMouseButtonDown(0)) {
-        if (CanUseBus && view.Model.ENode == ENode.Road) {
+        if (CanUseBus && view.Model.ENode == ENode.Intersection) {
           Debug.Log("start");
 
           CanUseBus = false;
@@ -127,33 +129,50 @@ namespace DefaultNamespace.Pathfinding.States {
         }
       }
 
-      int xDiff = Mathf.Abs(CurrentLocation.x - view.Model.X); 
-      int yDiff = Mathf.Abs(CurrentLocation.y - view.Model.Y);
-      Debug.Log(xDiff + " " + yDiff);
-      if (xDiff > 1
-          || yDiff > 1
-          || xDiff > 0 && yDiff > 0) {
-        //show message then selecting works only for closest tiles
+      if (view.Model.ENode == ENode.Road || view.Model.ENode == ENode.Intersection) {
+        int xDiff = Mathf.Abs(CurrentLocation.x - view.Model.X);
+        int yDiff = Mathf.Abs(CurrentLocation.y - view.Model.Y);
+        // Debug.Log(xDiff + " " + yDiff);
+        if (xDiff > 1
+            || yDiff > 1
+            || xDiff > 0 && yDiff > 0) {
+          //show message then selecting works only for closest tiles
+        }
+        else if (IsDrag && CurrentLocation != location && !WayPoints.Contains(location)) {
+          CurrentLocation = location;
+          WayPoints.Add(location);
+          WayPointNodes.Add(view);
+          view.Highlight();
+        }
       }
-      else if (IsDrag && CurrentLocation != location && !WayPoints.Contains(location)) {
-        CurrentLocation = location;
-        WayPoints.Add(location);
-        WayPointNodes.Add(view);
-        view.Highlight();
-      }
-      
+
       if (Input.GetMouseButtonUp(0) && IsDrag) {
         Debug.Log($"finish: {WayPoints.Count}");
-        if (WayPoints.Count <= 1) {
-          UseBus();
+        HashSet<Location> locations = new HashSet<Location>();
+        foreach (NodeView node in WayPointNodes) {
+          if (node.Model.ENode == ENode.Intersection) {
+            locations.Add(new Location(node.Model.X, node.Model.Y));
+          }
+        }
+        int uniqueBusStationCount = locations.Count;
+        
+        if (WayPoints.Count <= 1 || view.Model.ENode != ENode.Intersection || uniqueBusStationCount < 2) {
+          BusCount++;
+          CanUseBus = false;
+          
+          foreach (var node in WayPointNodes) {
+            node.Unhighlight();
+          }
         }
         else {
           path.AddRange(WayPoints);
           SpawnBus(view);
-        }
-
-        foreach (var node in WayPointNodes) {
-          node.Unhighlight();
+          
+          foreach (var node in WayPointNodes) {
+            if (node.Model.ENode == ENode.Intersection) {
+              node.Unhighlight();
+            }
+          }
         }
         
         WayPoints.Clear();

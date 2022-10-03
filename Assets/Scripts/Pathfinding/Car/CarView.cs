@@ -53,7 +53,7 @@ namespace DefaultNamespace.Pathfinding.States {
         }
       }
       Location rightLocation = new Location(closestLocation.x + Mathf.RoundToInt(transform.right.x), closestLocation.y + Mathf.RoundToInt(transform.right.z));
-      EventController.LocationVisited(rightLocation);
+      EventController.LocationVisited(closestLocation);
       
       // Vector3 clamped = new Vector3(Mathf.Round(transform.right.x), Mathf.Round(transform.right.y), Mathf.Round(transform.right.z));
       // Debug.Log(transform.right + " " + clamped);

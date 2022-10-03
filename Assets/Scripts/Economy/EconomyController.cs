@@ -2,6 +2,7 @@ using System;
 using DefaultNamespace.Events;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace DefaultNamespace.Economy {
@@ -38,6 +39,8 @@ namespace DefaultNamespace.Economy {
     public TMP_Text TMoney;
     public TMP_Text TPassengers;
     public TMP_Text TTime;
+    public Text TMoney2;
+    public Text TPassengers2;
 
     public int BusCount;
 
@@ -123,7 +126,9 @@ namespace DefaultNamespace.Economy {
 
       TTime.text = "Time: " + Timer.ToString("F");
       TMoney.text = "Money: " + GameState.Money + "(" + MoneyDiff + ")";
+      TMoney2.text = GameState.Money.ToString();
       TPassengers.text = "Passengers collected: " + GameState.PassengersCollected + "(" + PassengerDiff + ")";
+      TPassengers2.text = GameState.PassengersCollected.ToString();
     }
 
     void PayForGasoline() {
