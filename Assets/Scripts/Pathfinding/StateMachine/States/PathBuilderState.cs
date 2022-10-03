@@ -5,7 +5,9 @@ using DefaultNamespace.Events;
 using Pathfinding;
 using Plugins.Ext;
 using TMPro;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -272,8 +274,10 @@ namespace DefaultNamespace.Pathfinding.States {
 
       foreach (var d in aStarSearch.costSoFar) {
         if (!path.Contains(d.Key)) continue;
-        
+
+#if UNITY_EDITOR
         Handles.Label(new Vector3(d.Key.x, 0, d.Key.y), d.Value.ToString());
+#endif
       }
     }
   }
