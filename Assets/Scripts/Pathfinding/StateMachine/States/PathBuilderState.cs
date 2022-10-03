@@ -47,7 +47,12 @@ namespace DefaultNamespace.Pathfinding.States {
       // Canvas.enabled = true;
       EconomyController.Init();
       BBuyBus.onClick.AddListener(BuyBus);
+      EventController.BusBoughtConfirm += BusBoughtConfirm;
       // BUseBus.onClick.AddListener(UseBus);
+    }
+
+    void BusBoughtConfirm() {
+      BusCount++;
     }
 
     void UseBus() {
@@ -64,7 +69,6 @@ namespace DefaultNamespace.Pathfinding.States {
     }
 
     void BuyBus() {
-      BusCount++;
       EventController.BusBought();
     }
 

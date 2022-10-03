@@ -307,6 +307,7 @@ MonoBehaviour:
     TimeBeforeNextSpawn: 0
   PassengerPrefab: {fileID: 7402792874518947732, guid: b0a293435aa74184496d745162a191ac, type: 3}
   Passengers: []
+  TextPrefab: {fileID: 575976702033373238, guid: eddbc0b8add0246478a524ac0d008fe3, type: 3}
 --- !u!114 &3886629465926628389
 MonoBehaviour:
   m_ObjectHideFlags: 0
