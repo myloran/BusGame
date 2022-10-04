@@ -41,6 +41,7 @@ namespace DefaultNamespace.Pathfinding.States {
     public List<Location> WayPoints;
     public List<NodeView> WayPointNodes;
     public Location CurrentLocation;
+    public GameObject GasolineConsumptionTextPrefab;
 
     public override void OnEnter() {
       BusCount = 1;
@@ -117,9 +118,21 @@ namespace DefaultNamespace.Pathfinding.States {
       Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
       bool isHit = Physics.Raycast(ray, out RaycastHit hit, 100 /*, mask*/);
 
-      if (!isHit || UIExt.IsPointerOverUIElement()) return;
+      if (!isHit /*|| UIExt.IsPointerOverUIElement()*/) return;
+      
       NodeView view = hit.transform.GetComponent<NodeView>();
 
+      if (Input.GetMouseButtonUp(0) && IsDrag && view == null) {
+        foreach (var node in WayPointNodes) {
+          node.Unhighlight();
+        }
+        WayPoints.Clear();
+        WayPointNodes.Clear();
+        wayPoints.Clear();
+        path.Clear();
+        IsDrag = false;
+      }
+      
       if (view == null) return;
       // if (view.Model.ENode != ENode.Road) return;
 
@@ -243,6 +256,7 @@ namespace DefaultNamespace.Pathfinding.States {
       carView.SetGoal(wayPoints, path);
       carView.ColliderInFront = carView.transform.Find("ColliderInFront").GetComponent<BoxCollider>();
       carView.ColliderInRight = carView.transform.Find("ColliderInRight").GetComponent<BoxCollider>();
+      carView.GasolineConsumptionTextPrefab = GasolineConsumptionTextPrefab;
       Cars.Add(car);
 
       if (IsDebugEnabled) {

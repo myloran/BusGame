@@ -168,6 +168,7 @@ namespace DefaultNamespace.Economy {
     void PayForGasoline() {
       MoneyDiff -= BusCount * GasolineCost;
       GameState.Money -= BusCount * GasolineCost;
+      EventController.PayForGasoline();
     }
 
     void SpawnPassengers() {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Events;
@@ -15,6 +16,7 @@ namespace DefaultNamespace.Pathfinding.States {
     public BoxCollider ColliderInFront;
     public BoxCollider ColliderInRight;
     public float Speed = 1;
+    public GameObject GasolineConsumptionTextPrefab;
 
     public void SetGoal(List<Vector3> wayPoints, List<Location> path) {
       WayPoints.AddRange(wayPoints);
@@ -25,8 +27,18 @@ namespace DefaultNamespace.Pathfinding.States {
         CurrentIndex = 0;//WayPoints.Count - 1;
         Current = WayPoints[CurrentIndex];
       }
+      EventController.PayForGasoline += PayForGasoline;
     }
-    
+
+    void PayForGasoline() {
+      GameObject text = Instantiate(GasolineConsumptionTextPrefab, transform.position, Quaternion.identity);
+      text.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Vector3.up);
+    }
+
+    void OnDestroy() {
+      EventController.PayForGasoline -= PayForGasoline;
+    }
+
     public void Update() {
       if (!WayPoints.Any()) return;
       

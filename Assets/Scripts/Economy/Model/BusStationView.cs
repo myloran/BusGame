@@ -46,8 +46,8 @@ namespace DefaultNamespace.Economy {
       int max = Mathf.Min(count, Passengers.Count);
       
       for (int i = max - 1; i >= 0; i--) {
-        GameObject text = Instantiate(TextPrefab, Passengers[i].transform.position, quaternion.identity);
-        text.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Vector3.up);
+        // GameObject text = Instantiate(TextPrefab, Passengers[i].transform.position, quaternion.identity);
+        // text.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Vector3.up);
         Destroy(Passengers[i]);
         Passengers.RemoveAt(i);
       }

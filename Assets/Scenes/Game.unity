@@ -4855,6 +4855,7 @@ MonoBehaviour:
   CanUseBus: 0
   WayPoints: []
   WayPointNodes: []
+  GasolineConsumptionTextPrefab: {fileID: 575976702033373238, guid: 2c6140e297ada4d40a27ff2a054ab62b, type: 3}
 --- !u!1001 &1556901916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5210,6 +5211,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 1
   m_AntialiasingQuality: 2

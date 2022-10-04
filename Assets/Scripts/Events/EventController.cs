@@ -7,5 +7,6 @@ namespace DefaultNamespace.Events {
     public static Action BusBought = () => { };
     public static Action BusBoughtConfirm = () => { };
     public static Action BusUsed = () => { };
+    public static Action PayForGasoline = () => { };
   }
 }
